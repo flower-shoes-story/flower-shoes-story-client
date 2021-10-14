@@ -8,6 +8,7 @@ import GlobalStyles from "./styles";
 import theme from "./styles/theme";
 
 import Pages from "./pages";
+import Layout from "./components/Layout";
 
 const queryClient = new QueryClient();
 
@@ -17,7 +18,9 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
         <ModalProvider>
-          <Pages />
+          <Layout>
+            <Pages />
+          </Layout>
         </ModalProvider>
       </QueryClientProvider>
     </ThemeProvider>
