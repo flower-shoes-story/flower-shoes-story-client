@@ -100,3 +100,23 @@ export const updateEvent = async (event) => {
     throw Error("Internal Server Error");
   }
 };
+
+export const deleteUser = async (event) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/user/delete`,
+      {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      },
+    );
+
+    return await response.json();
+  } catch (error) {
+    throw Error("Internal Server Error");
+  }
+};
