@@ -7,6 +7,7 @@ import Main from "./Main";
 import Login from "./Login";
 import Queue from "./Queue";
 import Register from "./Register";
+import Settings from "./Settings";
 import NotFound from "./NotFound";
 import PrivateRoute from "../components/Shared/PrivateRoute";
 
@@ -30,6 +31,11 @@ const Pages = () => {
         path="/queue"
         isAuthenticated={user}
         component={Queue}
+      />
+      <PrivateRoute
+        path="/settings"
+        isAuthenticated={user}
+        component={Settings}
       />
       <Route path="/login" component={Login} />
       <Route path="*" exact component={NotFound} />
