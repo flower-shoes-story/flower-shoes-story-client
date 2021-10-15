@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { ModalProvider } from "./contexts/ModalContext";
 
 import GlobalStyles from "./styles";
+import GlobalFonts from "./styles/fonts";
 import theme from "./styles/theme";
 
 import Pages from "./pages";
@@ -17,6 +18,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
+        <GlobalFonts />
         <ModalProvider>
           <Layout>
             <Pages />
