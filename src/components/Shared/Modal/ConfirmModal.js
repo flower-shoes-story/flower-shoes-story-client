@@ -6,12 +6,11 @@ import { ModalContext } from "../../../contexts/ModalContext";
 import Button from "../Button";
 import CloseButton from "./CloseButton";
 
-const ConfirmModal = ({ setIsSubmit, setForm, message }) => {
+const ConfirmModal = ({ message, setIsConfirm }) => {
   const { handleModal } = useContext(ModalContext);
 
   const handleChange = () => {
-    setForm();
-    setIsSubmit(true);
+    setIsConfirm(true);
     handleModal(null);
   };
 
