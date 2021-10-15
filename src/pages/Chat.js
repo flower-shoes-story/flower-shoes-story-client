@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import styled from "styled-components";
 
-import FlexBox from "../components/Shared/FlexBox";
-import PageTitle from "../components/Shared/PageTitle";
-
 import { EVENTS } from "../constants";
 
-const Chat = ({ userInfo }) => {
+import PageTitle from "../components/Shared/PageTitle";
+import FlexBox from "../components/Shared/FlexBox";
+
+const Chat = () => {
+  const user = useSelector((state) => state.user);
   const socket = useRef();
 
   const [message, setMessage] = useState("");
@@ -16,7 +18,7 @@ const Chat = ({ userInfo }) => {
   useEffect(() => {
     socket.current = io("ws://localhost:8000");
 
-    socket.current.emit(EVENTS.JOIN, userInfo.couple._id);
+    socket.current.emit(EVENTS.JOIN, user.couple._id);
 
     socket.current.on(EVENTS.GET_MESSAGE, (chat) => {
       setMessages(chat);
@@ -25,14 +27,16 @@ const Chat = ({ userInfo }) => {
     socket.current.on(EVENTS.SEND_MESSAGE, (chat) => {
       setMessages((prev) => [...prev, chat]);
     });
-  }, [userInfo.couple._id]);
+  }, [user.couple._id]);
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     socket.current.emit(EVENTS.SEND_MESSAGE, {
-      user: userInfo._id,
-      message,
+      roomId: user.couple._id,
+      user: user._id,
+      message: message.trim(),
       time: new Date(),
     });
 

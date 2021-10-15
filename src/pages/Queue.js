@@ -1,39 +1,42 @@
 import React from "react";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 
 import { updateUser } from "../api";
+import { save } from "../features/userSlice";
 
-const Queue = ({ userInfo }) => {
+const Queue = () => {
   const history = useHistory();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const { couple } = userInfo;
+  const { couple } = user;
 
   const { isLoading, mutate } = useMutation(updateUser, {
     onSuccess: ({ result, data }) => {
+      const { user } = data;
+
       if (result === "success") {
+        dispatch(save(user));
         history.push("/chat");
       }
     },
   });
 
   const handleClickButton = () => {
-    mutate({ userInfo });
+    mutate({ user });
   };
 
   return (
-    <Wrapper>
-      { couple ?
+    <div>
+      {couple ?
         <p>상대방의 수락 요청을 기다리는 중입니다.</p>
         :
         <button type="button" onClick={handleClickButton}>수락하기</button>
       }
-    </Wrapper>
+    </div>
   );
 };
-
-const Wrapper = styled.div`
-`;
 
 export default Queue;

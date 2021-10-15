@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import { updateUser } from "../api";
+import { save } from "../features/userSlice";
 
 import Button from "../components/Shared/Button";
 import PageTitle from "../components/Shared/PageTitle";
 
-const Register = ({ setUser }) => {
+const Register = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const [partnerId, setPartnerId] = useState("");
 
   const { isLoading, mutate } = useMutation(updateUser, {
@@ -17,7 +20,7 @@ const Register = ({ setUser }) => {
       const { user } = data;
 
       if (result === "success") {
-        setUser(user);
+        dispatch(save(user));
         history.push("/queue");
       }
     },
@@ -37,7 +40,7 @@ const Register = ({ setUser }) => {
   };
 
   return (
-    <Wrapper>
+    <div>
       <PageTitle className="sr-only">Register</PageTitle>
 
       <form onSubmit={handleSubmit}>
@@ -55,11 +58,8 @@ const Register = ({ setUser }) => {
 
         <Button type="submit">submit</Button>
       </form>
-    </Wrapper>
+    </div>
   );
 };
-
-const Wrapper = styled.div`
-`;
 
 export default Register;
