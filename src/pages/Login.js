@@ -2,18 +2,21 @@ import React from "react";
 import firebase from "../config/firebase";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { postLogin } from "../api";
+import { save } from "../features/userSlice";
 
 const Login = ({ setUser }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const { mutate } = useMutation(postLogin, {
     onSuccess: ({ data }) => {
       const { user } = data;
 
-      setUser(user);
+      dispatch(save(user));
 
       if (!user.couple && !user.partner_id) {
         history.push("/register");
@@ -54,7 +57,7 @@ const Login = ({ setUser }) => {
 
   return (
     <Wrapper>
-      <button type="button" onClick={loginWithGoogle}>Google Login</button>
+        <button type="button" onClick={loginWithGoogle}>Google Login</button>
     </Wrapper>
   );
 };
