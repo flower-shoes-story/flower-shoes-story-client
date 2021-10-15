@@ -9,14 +9,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family:
-      -apple-system,
-      system-ui,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,sans-serif;
+    font-family: "adrianna", "Druk XCond Web", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
   }
 
   a {
@@ -29,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
-  input, button {
+  input, button, textarea {
     border: none;
     outline: none;
   }
@@ -39,9 +35,13 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  textarea {
+    resize: none;
+  }
+
   h1, h2, h3, h4, h5, h6{
-    font-family: "Maven Pro", sans-serif;
-    letter-spacing: 0.04em;
+    font-family: "adrianna-expended";
+    font-weight: 700;
   }
 
   ol, ul, li {
