@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 const TextInput = ({ label, width, name, placeholder, value, readOnly, className, onChange }) => {
   return (
-    <label htmlFor={label}>
+    <>
+      <label htmlFor={label}>{label}</label>
       <Input type="text"
         id={label}
         name={name}
@@ -15,7 +16,7 @@ const TextInput = ({ label, width, name, placeholder, value, readOnly, className
         className={className}
         placeholder={placeholder}
       />
-    </label>
+    </>
   );
 };
 
@@ -38,7 +39,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 };
 
 TextInput.defaultProps = {
