@@ -5,9 +5,11 @@ import logger from "redux-logger";
 import storage from "redux-persist/lib/storage";
 
 import userReducer from "./features/userSlice";
+import preloadReducer from "./features/preloadSlice";
 
 const reducers = combineReducers({
   user: userReducer,
+  preload: preloadReducer,
 });
 
 const persistConfig = {
