@@ -56,10 +56,36 @@ const GlobalStyle = createGlobalStyle`
   .sr-only {
     overflow: hidden;
     position: absolute;
-    left: -10000px;
+    left: -9999px;
     top: auto;
     width: 1px;
     height: 1px;
+  }
+
+  section {
+    position: relative;
+    height: 100vh;
+    padding: 110px;
+
+    @keyframes flow {
+      0% {
+        background-position: left 0;
+      }
+      to {
+        background-position: left -3741px;
+      }
+    }
+
+    @keyframes noise {
+      0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn);
+      }
+    }
   }
 `;
 
