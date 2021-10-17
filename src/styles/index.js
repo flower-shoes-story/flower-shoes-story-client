@@ -78,11 +78,9 @@ const GlobalStyle = createGlobalStyle`
 
     @keyframes noise {
       0% {
-        -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
       }
       to {
-        -webkit-transform: rotate(1turn);
         transform: rotate(1turn);
       }
     }
