@@ -94,7 +94,6 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   opacity: 1;
-  z-index: -1;
   background: url(${bg_texture_grey}) repeat 50%/400px 200px;
   transition: .7s linear;
 `;

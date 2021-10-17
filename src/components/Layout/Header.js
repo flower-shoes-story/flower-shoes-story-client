@@ -85,6 +85,10 @@ const Wrapper = styled.header`
       transition: .79s cubic-bezier(.36,.01,.18,1) .24s;
     }
 
+    li:last-child {
+      transition: .91s cubic-bezier(.36,.01,.18,1) .36s;
+    }
+
     li a {
       font-size: 11px;
     }
@@ -126,7 +130,6 @@ const Description = styled.ul`
     height: 100px;
     width: 1px;
     background-color: rgba(26,26,30,.65);
-    -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
   }
 `;
