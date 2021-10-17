@@ -23,12 +23,14 @@ Button.defaultProps = {
 
 const DefaultButton = styled.button`
   display: inline-block;
-  min-width: 80px;
-  height: 45px;
-  border-radius: 8px;
-  background-color: #2f49d1;
-  vertical-align: middle;
-  color: #fff;
+  border: 2px solid #1a1a1e;
+  padding: 10px 20px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-family: "adrianna-extended";
+  color: #222;
 `;
 
 export default Button;
