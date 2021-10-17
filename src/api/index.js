@@ -120,3 +120,23 @@ export const deleteUser = async (event) => {
     throw Error("Internal Server Error");
   }
 };
+
+export const getScore = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/score`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      },
+    );
+
+    return await response.json();
+  } catch (error) {
+    throw Error("Internal Server Error");
+  }
+};
