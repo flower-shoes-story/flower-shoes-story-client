@@ -19,7 +19,7 @@ const ConfirmModal = ({ message, setIsConfirm }) => {
       <p>{message}</p>
       <ButtonBox>
         <CloseButton text="취소" closeModal={() => handleModal(null)} />
-        <StyledButton type="button" onClick={handleChange}>확인</StyledButton>
+        <Button type="button" onClick={handleChange}>확인</Button>
       </ButtonBox>
     </Wrapper>
   );
@@ -34,16 +34,13 @@ const Wrapper = styled.div`
   button {
     min-width: 80px;
     position: initial;
+    font-weight: 600;
     color: #222;
 
     :before, :after {
       content: none;
     }
   }
-`;
-
-const StyledButton = styled(Button)`
-  color: #fff !important;
 `;
 
 const ButtonBox = styled.div`
