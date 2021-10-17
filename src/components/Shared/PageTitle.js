@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 const PageTitle = ({ children, className }) => {
   return (
-    <PageTitleWrapper className={className}>{children}</PageTitleWrapper>
+    <Wrapper className={className}>{children}</Wrapper>
   );
 };
 
-const PageTitleWrapper = styled.h1`
+const Wrapper = styled.h2`
   font-size: 20px;
   font-weight: 600;
 `;
