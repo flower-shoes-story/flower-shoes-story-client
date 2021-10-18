@@ -15,7 +15,7 @@ const Calendar = () => {
   const [event, setEvent] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { isLoading, mutate } = useMutation(updateEvent, {
+  const { mutate } = useMutation(updateEvent, {
     onSuccess: ({ result, events }) => {
       if (result === "success") {
         const enrolledEvents = formatEvents(events);

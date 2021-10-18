@@ -13,7 +13,7 @@ const Queue = () => {
 
   const { couple } = user;
 
-  const { isLoading, mutate } = useMutation(updateUser, {
+  const { mutate } = useMutation(updateUser, {
     onSuccess: ({ result, data }) => {
       const { user } = data;
 

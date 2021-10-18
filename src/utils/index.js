@@ -34,7 +34,7 @@ export const formatEvents = (events) => {
 
   for (const key in events) {
     if (events[key].length) {
-      events[key].map((item) => {
+      events[key].forEach((item) => {
         eventList.push({
           title: key,
           start: formatDate(item.startDate),
