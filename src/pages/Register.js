@@ -15,7 +15,7 @@ const Register = () => {
 
   const [partnerId, setPartnerId] = useState("");
 
-  const { isLoading, mutate } = useMutation(updateUser, {
+  const { mutate } = useMutation(updateUser, {
     onSuccess: ({ result, data }) => {
       const { user } = data;
 
@@ -34,9 +34,14 @@ const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { type, date } = event.target;
+    const { type, date, discharge } = event.target;
 
-    mutate({ type: type.value, partnerId, date: date.value });
+    mutate({
+      type: type.value,
+      partnerId,
+      date: date.value,
+      discharge: discharge.value,
+    });
   };
 
   return (
@@ -55,6 +60,9 @@ const Register = () => {
 
         <p>첫 만남일을 선택해주세요.</p>
         <input type="date" name="date" defaultValue={currentDate} max={currentDate} />
+
+        <p>전역일을 선택해주세요.</p>
+        <input type="date" name="discharge" defaultValue={currentDate} />
 
         <Button type="submit">submit</Button>
       </form>
