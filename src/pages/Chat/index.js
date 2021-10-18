@@ -93,8 +93,6 @@ const Chat = () => {
     }
   };
 
-  console.log(messages);
-
   return (
     <Wrapper>
       <PageTitle className="sr-only">Chat</PageTitle>
@@ -134,11 +132,11 @@ const Wrapper = styled.div`
 
 const ChatBox = styled.div`
   position: relative;
-  margin-top: -110px;
+  flex: 1;
   margin-left: auto;
-  width: 350px;
-  padding: 110px 20px 30px;
-  background-color: #eee;
+  max-width: 350px;
+  padding: 20px 20px 30px;
+  background-color: #fff;
 
   ul {
     height: calc(100% - 100px);
@@ -156,7 +154,7 @@ const ChatBox = styled.div`
   li span {
     display: inline-block;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 50px;
     border-bottom-right-radius: 0;
     background-color: #6b8af4;
     text-align: left;
@@ -171,7 +169,7 @@ const ChatBox = styled.div`
   li.left span {
     background-color: #f8f6fd;
     color: #6e7277;
-    border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 50px;
     border-bottom-left-radius: 0;
   }
 `;
