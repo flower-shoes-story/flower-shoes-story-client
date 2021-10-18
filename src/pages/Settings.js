@@ -50,7 +50,7 @@ const Settings = () => {
     },
   }, []);
 
-  const { isLoading, mutate } = useMutation(deleteUser, {
+  const { mutate } = useMutation(deleteUser, {
     onSuccess: ({ result }) => {
       if (result === "success") {
         dispatch(remove());
