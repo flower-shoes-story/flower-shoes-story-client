@@ -16,7 +16,12 @@ const Pages = () => {
 
   return (
     <Switch>
-      <Route path="/" exact component={Main} />
+      <PrivateRoute
+        path="/"
+        exact
+        isAuthenticated={user}
+        component={Main}
+      />
       <PrivateRoute
         path="/chat"
         isAuthenticated={user}
