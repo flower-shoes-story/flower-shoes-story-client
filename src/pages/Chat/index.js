@@ -45,10 +45,9 @@ const Chat = () => {
 
     if (startIndex > 10) {
       setStartIndex(0);
-      socket.current.emit(EVENTS.RESET_START_POSITION, user.couple._id, startIndex);
     }
 
-    socket.current.emit("setCurrentIndex", user.couple._id, startIndex);
+    socket.current.emit(EVENTS.RESET_START_POSITION, user.couple._id, startIndex);
   }, [startIndex, user.couple._id]);
 
   useEffect(() => {
