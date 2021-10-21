@@ -8,6 +8,8 @@ import { EVENTS } from "../../constants";
 import ChatUI from "./ChatUI";
 import PageTitle from "../../components/Shared/PageTitle";
 
+import bg_texture from "../../assets/bg_texture.png";
+
 const Chat = () => {
   const user = useSelector((state) => state.user);
   const socket = useRef();
@@ -20,7 +22,6 @@ const Chat = () => {
 
   useEffect(() => {
     socket.current = io(process.env.REACT_APP_SOCKET_URL);
-
     socket.current.emit(EVENTS.JOIN, user.couple._id);
 
     socket.current.on(EVENTS.GET_MESSAGES, (chat) => {
@@ -34,10 +35,15 @@ const Chat = () => {
     socket.current.on(EVENTS.SEND_MESSAGE, (chat) => {
       setMessages((prev) => [...prev, chat]);
     });
+
   }, [user.couple._id]);
 
   useEffect(() => {
-    if (startIndex === 14) {
+    if (startIndex < 0) {
+      setStartIndex(0);
+    }
+
+    if (startIndex > 10) {
       setStartIndex(0);
     }
 
@@ -49,11 +55,13 @@ const Chat = () => {
       if (direction === "up") {
         setMoveDirection(() => true);
         setStartIndex((prev) => prev + 1);
+        return;
       }
 
       if (direction === "down") {
         setMoveDirection(() => false);
         setStartIndex((prev) => prev - 1);
+        return;
       }
     });
   }, [setMoveDirection]);
@@ -93,8 +101,6 @@ const Chat = () => {
     }
   };
 
-  console.log(messages);
-
   return (
     <Wrapper>
       <PageTitle className="sr-only">Chat</PageTitle>
@@ -128,14 +134,34 @@ const Chat = () => {
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  margin: 0 -110px;
-  height: calc(100vh - 110px);
+  margin: -110px;
+  height: 100vh;
+  background-color: #7e94b1;
+
+  :before {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: 172px;
+    left: calc(50vw - 2.25vw);
+    width: 24.305vw;
+    height: 24.305vw;
+    border-radius: 50%;
+    background-color: #dda647;
+  }
+
+  :after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: calc(100vw - 350px);
+    height: 100vh;
+    background: url(${bg_texture}) repeat 50%/300px 150px;
+  }
 `;
 
 const ChatBox = styled.div`
   position: relative;
-  margin-top: -110px;
-  margin-left: auto;
   width: 350px;
   padding: 110px 20px 30px;
   background-color: #eee;
@@ -156,9 +182,9 @@ const ChatBox = styled.div`
   li span {
     display: inline-block;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 50px;
     border-bottom-right-radius: 0;
-    background-color: #6b8af4;
+    background-color: #222;
     text-align: left;
     color: #fff;
     font-size: 14px;
@@ -171,7 +197,7 @@ const ChatBox = styled.div`
   li.left span {
     background-color: #f8f6fd;
     color: #6e7277;
-    border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 50px;
     border-bottom-left-radius: 0;
   }
 `;
@@ -181,13 +207,13 @@ const ChatForm = styled.form`
   bottom: 30px;
   width: calc(100% - 40px);
   height: 80px;
-  padding: 15px;
-  border: 1px solid red;
   border-radius: 10px;
 
   textarea {
     width: 100%;
     height: 100%;
+    padding: 15px;
+    border-radius: inherit;
   }
 `;
 
