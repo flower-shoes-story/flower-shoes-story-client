@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ChatUI = ({ startIndex, moveDirection }) => {
-  const stairs = Array(14).fill("");
+  const stairs = Array(10).fill("");
 
   return (
     <Wrapper>
@@ -13,6 +13,20 @@ const ChatUI = ({ startIndex, moveDirection }) => {
           );
         })}
       </Stairs>
+      <Stairs>
+        {stairs.map((_, index) => {
+          return (
+            <Stair className="stair" key={index} index={index} />
+          );
+        })}
+      </Stairs>
+      <Plant>
+        <div className="stem stem-center"></div>
+        <div className="stem stem-left-s"></div>
+        <div className="stem stem-right-s"></div>
+        <div className="stem stem-left-l"></div>
+        <div className="stem stem-right-l"></div>
+      </Plant>
       <Character
         moveDirection={moveDirection}
         key={startIndex}
@@ -29,10 +43,184 @@ const ChatUI = ({ startIndex, moveDirection }) => {
   );
 };
 
+const Plant = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 110px;
+  transform: scale(.6);
+
+  .stem {
+    position: absolute;
+    bottom: 0;
+    transform-origin: 50% 100%;
+    z-index: 10;
+    overflow: hidden;
+
+    :before, :after {
+      content: "";
+      position: absolute;
+      top: 0;
+      border-top: 0;
+      border-radius: 50%;
+    }
+  }
+
+  .stem-left-s {
+    width: 50px;
+    height: 60px;
+    left: -15px;
+    animation: wave 3s infinite ease-in-out;
+
+    :before {
+      right: 0;
+      width: 90px;
+      height: 120px;
+      border-right: 20px solid #2b544d;
+    }
+
+    :after {
+      top:1px;
+      right:6px;
+      width:90px;
+      height:120px;
+      transform: rotateZ(15deg);
+      border-right: 18px solid #2b544d;
+    }
+  }
+
+  .stem-left-l {
+    width: 80px;
+    height: 100px;
+    left: -30px;
+    animation: reverseWave 4s infinite ease-in-out;
+
+    :before {
+      right:2px;
+      width: 160px;
+      height: 190px;
+      border-right: 25px solid #2b544d;
+      transform: rotateZ(20deg);
+    }
+
+    :after {
+      right: 7px;
+      width: 160px;
+      height: 190px;
+      border-right: 18px solid #2b544d;
+      transform: rotateZ(25deg);
+    }
+  }
+
+  .stem-right-s {
+    height: 50px;
+    width: 80px;
+    right: -35px;
+    animation: reverseWave 3.2s -0.5s infinite ease-in-out;
+
+    :before {
+      left: 0;
+      height: 190px;
+      width: 100px;
+      border-left: 22px solid #2b544d;
+    }
+
+    :after {
+      left: 15px;
+      width: 100px;
+      height: 190px;
+      border-left: 13px solid #2b544d;
+      transform: rotateZ(-10deg);
+    }
+  }
+
+  .stem-right-l {
+    width: 80px;
+    height: 75px;
+    right: -22px;
+    animation: wave 3.2s -1s infinite ease-in-out;
+
+    :before {
+      left: 0;
+      width: 160px;
+      height: 190px;
+      border-left: 26px solid #2b544d;
+    }
+
+    :after {
+      left: 6px;
+      height: 190px;
+      width: 160px;
+      border-left: 20px solid #2b544d;
+      transform: rotateZ(-10deg);
+    }
+  }
+
+  .stem-center {
+    width: 90px;
+    height: 120px;
+    left: -15px;
+    animation: wave 3s -1.2s infinite ease-in-out;
+
+    :before {
+      right: 10px;
+      width: 140px;
+      height: 240px;
+      border-right: 28px solid #2b544d;
+      transform: rotateZ(15deg);
+    }
+
+    :after {
+      right:15px;
+      height:240px;
+      width:140px;
+      border-right: 17px solid #2b544d;
+      transform: rotateZ(15deg);
+    }
+  }
+};
+
+@keyframes wave {
+	0% {
+		transform: rotateZ(3deg) translateZ(-1px);
+	}
+	25%{
+		transform: rotateZ(-4deg) translateZ(-1px);
+	}
+	50% {
+		transform: rotateZ(2deg) translateZ(-1px);
+	}
+	75% {
+		transform: rotateZ(-6deg) translateZ(-1px);
+	}
+	100% {
+		transform: rotateZ(3deg) translateZ(-1px);
+	}
+}
+
+@keyframes reverseWave {
+	0% {
+		transform: rotateZ(0deg) translateZ(-1px);
+	}
+	25%{
+		transform: rotateZ(-3deg) translateZ(-1px);
+	}
+	50% {
+		transform: rotateZ(3deg) translateZ(-1px);
+	}
+	75% {
+		transform: rotateZ(-1deg) translateZ(-1px);
+	}
+	100% {
+		transform: rotateZ(0deg) translateZ(-1px);
+	}
+}
+`;
+
 const Character = styled.div`
   position: absolute;
-  bottom: ${(props) => `${props.startIndex * 50}px`};
-  right: ${(props) => `${props.startIndex * 50}px`};
+  bottom: ${(props) => `${props.startIndex * 3.472}vw`};
+  right: ${(props) => `${props.startIndex * 3.472}vw`};
   width: 26px;
   height: 115px;
   transform: scaleX(-1);
@@ -40,29 +228,52 @@ const Character = styled.div`
 
   @keyframes moveUp {
     0% {
-      bottom: ${(props) => (props.startIndex - 1) * 50 + "px"};
-      right: ${(props) => (props.startIndex - 1) * 50 + "px"};
+      bottom: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
+      right: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
     }
     25% {
-      bottom: ${(props) => props.startIndex * 50 + "px"};
-      right: ${(props) => (props.startIndex - 1) * 50 + "px"};
+      bottom: ${(props) => props.startIndex * 3.472 + "vw"};
+      right: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
     }
     50% {
-      bottom: ${(props) => props.startIndex * 50 + 15 + "px"};
-      right: ${(props) => (props.startIndex - 1) * 50 + 15 + "px"};
+      bottom: ${(props) => props.startIndex * 3.472 + 1.041666 + "vw"};
+      right: ${(props) => (props.startIndex - 1) * 3.472 + 1.041666 + "vw"};
     }
     75% {
-      bottom: ${(props) => props.startIndex * 50 + 15 + "px"};
-      right: ${(props) => (50 * (props.startIndex - 1) + 40) + "px"};
+      bottom: ${(props) => props.startIndex * 3.472 + 1.041666 + "vw"};
+      right: ${(props) => (3.472 * (props.startIndex - 1) + 2.777) + "vw"};
     }
     100% {
-      bottom: ${(props) => 50 * props.startIndex + "px"};
-      right: ${(props) => 50 * props.startIndex + "px"};
+      bottom: ${(props) => 3.472 * props.startIndex + "vw"};
+      right: ${(props) => 3.472 * props.startIndex + "vw"};
+    }
+  }
+
+  @keyframes moveDown {
+    0% {
+      bottom: ${(props) => 3.472 * (props.startIndex) + "vw"};
+      right: ${(props) => 3.472 * (props.startIndex) + "vw"};
+    }
+    25% {
+      bottom: ${(props) => (props.startIndex * 3.472) + 1.041666 + "vw"};
+      right: ${(props) => (3.472 * props.startIndex) - 0.69444 + "vw"};
+    }
+    50% {
+      bottom: ${(props) => (props.startIndex * 3.472) + 1.041666 + "vw"};
+      right: ${(props) => (props.startIndex * 3.472) - 2.777 + "vw"};
+    }
+    75% {
+      bottom: ${(props) => props.startIndex * 3.472 + "vw"};
+      right: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
+    }
+    100% {
+      bottom: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
+      right: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
     }
   }
 
   .head {
-    background-color: skyblue;
+    background-color: #222;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -71,7 +282,7 @@ const Character = styled.div`
   }
 
   .upper-body {
-    background-color: skyblue;
+    background-color: #222;
     position: absolute;
     top: 19px;
     left: 0;
@@ -88,8 +299,8 @@ const Character = styled.div`
     width: 5px;
     height: 34px;
     z-index: -10;
-    background-color: skyblue;
-    border: 5px solid skyblue;
+    background-color: #222;
+    border: 5px solid #222;
     border-radius: 10px;
     z-index: 10;
     transform: rotate(355deg);
@@ -104,8 +315,8 @@ const Character = styled.div`
     left: 5px;
     width: 10px;
     height: 30px;
-    border: 5px solid skyblue;
-    background-color: skyblue;
+    border: 5px solid #222;
+    background-color: #222;
     border-radius: 10px;
     transform-origin: 10px 10px;
     animation: moveUpperLeg 1s linear;
@@ -118,8 +329,8 @@ const Character = styled.div`
     left: 5px;
     width: 10px;
     height: 25px;
-    border: 5px solid skyblue;
-    background-color: skyblue;
+    border: 5px solid #222;
+    background-color: #222;
     border-radius: 10px;
     transform-origin: 10px 5px;
     animation: moveDownLeg 1s linear;
@@ -132,8 +343,8 @@ const Character = styled.div`
     left: 5px;
     width: 20px;
     height: 5px;
-    border: 5px solid skyblue;
-    background-color: skyblue;
+    border: 5px solid #222;
+    background-color: #222;
     border-radius: 10px;
     transform-origin: 9px 9px;
     animation: moveFoot 1s linear;
@@ -142,21 +353,36 @@ const Character = styled.div`
 `;
 
 const Stairs = styled.div`
+  :before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    display: block;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    width: 100px;
+    height: 200px;
+    background-color: #565ba6;
+  }
+
   position: absolute;
   left: 0;
   bottom: 0;
 `;
 
 const Stair = styled.div`
-  background-color: #eee;
-  width: ${(props) => Number(props.index + 1) * 50 + "px"};
-  height: 50px;
+  background-color: #e47732;
+  width: ${(props) => Number(props.index + 1) * 3.472 + "vw"};
+  height: 3.472vw;
 `;
 
 const Wrapper = styled.div`
   position: relative;
-  width: 738px;
+  width: 38.19444vw;
+  margin-left: auto;
   padding-left: 110px;
+  transform: scaleX(-1);
 `;
 
 export default ChatUI;

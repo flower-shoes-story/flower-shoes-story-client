@@ -47,11 +47,11 @@ const Wrapper = styled.li`
 const Petal = styled.div`
   position: absolute;
   z-index: 1;
-  background: #fff;
+  background: #f4dbad;
   border-radius: 2px 50px;
   transform-origin: 0% 0%;
   border-radius: 2% 50%;
-  opacity: .8;
+  opacity: 1;
   transition: all 0.5s ease-in-out;
   box-shadow: 0 0 0 0 rgb(0 0 0 / 0%);
   transform: ${(props) => `rotate(${props.index * (360 / props.petals)}deg) translateY(0);`};

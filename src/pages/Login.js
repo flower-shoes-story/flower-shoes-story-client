@@ -19,8 +19,30 @@ const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.user);
   const preload = useSelector((state) => state.preload.isLoaded);
   const [isAnimated, setIsAnimated] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      if (!user.couple && !user.partner_id) {
+        history.push("/register");
+        return;
+      }
+
+      if (!user.couple && user.partner_id) {
+        history.push("/queue");
+        return;
+      }
+
+      if (user.couple && !user.is_matched) {
+        history.push("/queue");
+        return;
+      }
+
+      history.push("/");
+    }
+  }, [history, user]);
 
   useEffect(() => {
     setTimeout(() => {
