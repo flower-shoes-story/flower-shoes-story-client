@@ -9,11 +9,16 @@ import { formatEvents } from "../../utils";
 import { getEvents, updateEvent } from "../../api";
 
 import TextInput from "../Shared/TextInput";
+import Dropdown from "../Shared/Dropdown";
+import Button from "../Shared/Button";
 
 const Calendar = () => {
   const [date, setDate] = useState([]);
   const [event, setEvent] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedOption, setSelectedOption] = useState("visit");
+
+  const options = ["visit", "vacation", "anniversary"];
 
   const { mutate } = useMutation(updateEvent, {
     onSuccess: ({ result, events }) => {
@@ -54,7 +59,7 @@ const Calendar = () => {
     };
 
     const targetEvent = {
-      eventName: event.target.events.value,
+      eventName: selectedOption,
       startDate: date[0].date,
       endDate: date[1].date,
     };
@@ -78,13 +83,9 @@ const Calendar = () => {
           <TextInput label="startDate" name="startDate" value={date[0]?.dateStr} readOnly />
           <TextInput label="endDate" name="endDate" value={date[1]?.dateStr} readOnly />
 
-          <select name="events">
-            <option value="visit">면회</option>
-            <option value="vacation">휴가</option>
-            <option value="anniversary">기념일</option>
-          </select>
+          <Dropdown options={options} selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
 
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
         </form>
 
         {errorMessage && errorMessage}
@@ -94,8 +95,20 @@ const Calendar = () => {
 };
 
 const RegisterBox = styled.div`
+  form {
+    text-align: center;
+  }
+
+  form button {
+    height: 45px;
+  }
+
   input {
     width: 100px;
+  }
+
+  label ~ label {
+    margin-left: 10px;
   }
 `;
 
@@ -141,6 +154,7 @@ const Wrapper = styled.div`
   .fc-view-harness * {
     font-family: "adrianna-expended";
     border: 0 !important;
+    font-size: 13px;
   }
 
   .fc-scroller-harness {
@@ -164,6 +178,10 @@ const Wrapper = styled.div`
     border-radius: 50%;
     width: 22px;
     height: 22px;
+  }
+
+  .fc .fc-daygrid-day-number {
+    padding: 5px;
   }
 
   .fc-daygrid-day-top {
