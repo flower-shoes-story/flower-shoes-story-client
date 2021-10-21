@@ -88,7 +88,7 @@ const Settings = () => {
         })}
       </FlowerList>
       <Setting>
-        <li><Button onClick={handleClickWithdraw}>WITHDRAWAL</Button></li>
+        <li><Button onClick={handleClickWithdraw}>DELETE ACCOUNT</Button></li>
       </Setting>
     </Wrapper>
   );

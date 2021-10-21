@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   input[type="text"] {
     appearance: none;
     outline: none;
+    background-color: transparent;
   }
 
   input, button, textarea {

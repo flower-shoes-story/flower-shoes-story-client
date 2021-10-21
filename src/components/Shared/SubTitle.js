@@ -8,15 +8,13 @@ const SubTitle = ({ children }) => {
 };
 
 const Wrapper = styled.h3`
-  -moz-text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
-  -moz-text-stroke-color: #777;
-  -webkit-text-stroke-color: #777;
-  -moz-text-stroke-width: 1.2px;
-  -webkit-text-stroke-width: 1.2px;
-  font-size: 3vw;
-  -webkit-font-smoothing: antialiased;
-  letter-spacing: 0.02em;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  border-bottom: 0;
+  font-size: 17px;
+  line-height: 1.5em;
+  font-family: 'adrianna';
 `;
 
 export default SubTitle;
