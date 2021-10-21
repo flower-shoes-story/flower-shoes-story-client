@@ -183,7 +183,7 @@ const ChatBox = styled.div`
   li span {
     display: inline-block;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 50px;
     border-bottom-right-radius: 0;
     background-color: #222;
     text-align: left;
@@ -198,7 +198,7 @@ const ChatBox = styled.div`
   li.left span {
     background-color: #f8f6fd;
     color: #6e7277;
-    border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 50px;
     border-bottom-left-radius: 0;
   }
 `;
