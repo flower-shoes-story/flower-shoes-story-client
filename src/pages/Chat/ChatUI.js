@@ -20,6 +20,7 @@ const ChatUI = ({ startIndex, moveDirection }) => {
           );
         })}
       </Stairs>
+      {startIndex === 10 && <Confirm>+1</Confirm>}
       <Plant>
         <div className="stem stem-center"></div>
         <div className="stem stem-left-s"></div>
@@ -42,6 +43,32 @@ const ChatUI = ({ startIndex, moveDirection }) => {
     </Wrapper>
   );
 };
+
+const Confirm = styled.div`
+  position: absolute;
+  bottom: calc(3.472vw * 10 + 130px);
+  left: 0;
+  padding: 0px 19px;
+  transform: scaleX(-1);
+  opacity: 0;
+  animation: fade .5s ease-in-out;
+  animation-delay: 1000ms;
+
+  @keyframes fade {
+    0% {
+      opacity: 0;
+      bottom: calc(3.472vw * 10 + 130px);
+    }
+    50% {
+      opacity: 1;
+      bottom: calc(3.472vw * 10 + 135px);
+    }
+    100% {
+      opacity: 0;
+      bottom: calc(3.472vw * 10 + 140px);
+    }
+  }
+`;
 
 const Plant = styled.div`
   position: absolute;

@@ -8,6 +8,7 @@ import { updateUser } from "../api";
 import { save } from "../features/userSlice";
 
 import Background from "../components/Shared/Background";
+import Button from "../components/Shared/Button";
 
 const Queue = () => {
   const history = useHistory();
@@ -40,7 +41,11 @@ const Queue = () => {
         </Inner>
       )
         :
-        <button type="button" onClick={handleClickButton}>수락하기</button>
+        <Inner>
+          <p>{user.partner_id}<span><br />has requested couple.</span></p>
+          <p><span>Do you want to accept?</span></p>
+          <Button type="button" onClick={handleClickButton}>ACCEPT</Button>
+        </Inner>
       }
       <Background />
     </Wrapper>
@@ -55,6 +60,11 @@ const Wrapper = styled.div`
   p {
     margin-top: 20px;
     font-family: "adrianna-extended";
+
+    span {
+      font-size: 15px;
+      vertical-align: top;
+    }
   }
 `;
 
