@@ -43,7 +43,7 @@ const Settings = () => {
         return;
       }
 
-      if (data > 10) {
+      if (data >= 10 && data < 100) {
         setFlower(4);
         return;
       }
