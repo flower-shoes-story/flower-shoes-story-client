@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+import { remove } from "../../features/userSlice";
+import { postLogout } from "../../api";
+
 const Header = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
   const preload = useSelector((state) => state.preload.isLoaded);
   const [isAnimated, setIsAnimated] = useState(false);
 
@@ -15,6 +22,17 @@ const Header = () => {
     }, 2300);
   }, [preload]);
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+
+    const { result } = await postLogout();
+
+    if (result === "success") {
+      dispatch(remove());
+      history.push("/login");
+    }
+  };
+
   return (
     <Wrapper isAnimated={isAnimated}>
       <h1><a href="/">FSS</a></h1>
@@ -22,13 +40,17 @@ const Header = () => {
         <h2 className="sr-only">navigation</h2>
         <ul>
           <li><a href="/">MAIN</a></li>
-          <li><a href="/chat">CHAT</a></li>
-          <li><a href="/settings">SETTINGS</a></li>
+          {user && user.is_matched &&
+            <>
+              <li><a href="/chat">CHAT</a></li>
+              <li><a href="/settings">SETTINGS</a></li>
+            </>
+          }
         </ul>
       </nav>
       <Description isAnimated={isAnimated}>
         <li>FLOWER SHOES STORY</li>
-        <li>FOR SOLDIER</li>
+        <li>{user ? <a href="/logout" onClick={handleLogout}>LOGOUT</a> : "FOR SOLDIER"}</li>
       </Description>
     </Wrapper>
   );

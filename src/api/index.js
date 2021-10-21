@@ -19,6 +19,26 @@ export const postLogin = async (user) => {
   }
 };
 
+export const postLogout = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/auth/logout`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      },
+    );
+
+    return await response.json();
+  } catch (error) {
+    throw Error("Internal Server Error");
+  }
+};
+
 export const getAuthCheck = async () => {
   try {
     const response = await fetch(
