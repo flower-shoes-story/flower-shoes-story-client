@@ -28,22 +28,22 @@ const Settings = () => {
 
   useQuery("score", getScore, {
     onSuccess: ({ data }) => {
-      if (data > 1000) {
-        setFlower(8);
-        return;
-      }
-
-      if (data > 500) {
+      if (data === 40 || data > 40) {
         setFlower(7);
         return;
       }
 
-      if (data > 100) {
+      if (data === 30 || data > 30) {
         setFlower(6);
         return;
       }
 
-      if (data > 10) {
+      if (data === 20 || data > 20) {
+        setFlower(5);
+        return;
+      }
+
+      if (data > 10 && data < 100) {
         setFlower(4);
         return;
       }
@@ -83,8 +83,8 @@ const Settings = () => {
       <PageTitle className="sr-only">Settings</PageTitle>
       <SubTitle>COLLECTED FLOWERS</SubTitle>
       <FlowerList>
-        {flowerList.map((item, index) => {
-          return <Flower flower={4 + index} key={item} />;
+        {flowerList.map((_, index) => {
+          return <Flower flower={4 + index} key={index} />;
         })}
       </FlowerList>
       <Setting>
@@ -114,8 +114,8 @@ const FlowerList = styled.ul`
   li {
     display: inline-block;
     margin: 0 20px;
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
   }
 `;
 
