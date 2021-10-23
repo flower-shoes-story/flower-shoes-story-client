@@ -131,7 +131,7 @@ const Wrapper = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #eee;
+    background-color: #222;
   }
 
   form {

@@ -47,7 +47,7 @@ const Wrapper = styled.li`
 const Petal = styled.div`
   position: absolute;
   z-index: 1;
-  background: #7e94b1;
+  background: #f18989;
   border-radius: 2px 20px;
   transform-origin: 0% 0%;
   border-radius: 2% 50%;

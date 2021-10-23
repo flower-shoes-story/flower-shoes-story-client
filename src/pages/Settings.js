@@ -28,22 +28,22 @@ const Settings = () => {
 
   useQuery("score", getScore, {
     onSuccess: ({ data }) => {
-      if (data === 40 || data > 40) {
+      if (data >= 40 && data <= 400) {
         setFlower(7);
         return;
       }
 
-      if (data === 30 || data > 30) {
+      if (data >= 30 && data <= 300) {
         setFlower(6);
         return;
       }
 
-      if (data === 20 || data > 20) {
+      if (data >= 20 && data <= 200) {
         setFlower(5);
         return;
       }
 
-      if (data > 10 && data < 100) {
+      if (data >= 10 && data <= 100) {
         setFlower(4);
         return;
       }
