@@ -137,7 +137,7 @@ const Wrapper = styled.div`
 
   .fc-toolbar-chunk * {
     background-color: transparent !important;
-    border: none;
+    border: none !important;
     color: #222 !important;
     font-family: "adrianna";
     text-transform: uppercase;
@@ -185,7 +185,7 @@ const Wrapper = styled.div`
   }
 
   .fc-daygrid-day-top {
-    flex-direction: inherit;
+    flex-direction: column !important;
   }
 
   .fc-h-event {

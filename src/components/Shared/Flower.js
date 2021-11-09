@@ -15,14 +15,12 @@ const Flower = ({ flower }) => {
 
 const Wrapper = styled.li`
   position: relative;
-
   div {
     top: 20px;
     left: 20px;
     width: 20px;
     height: 20px;
   }
-
   :after {
     content: "";
     position: absolute;
@@ -35,7 +33,6 @@ const Wrapper = styled.li`
     border-radius: 50%;
     opacity: 1;
   }
-
   > div {
     width: 20px;
     height: 20px;
@@ -47,7 +44,7 @@ const Wrapper = styled.li`
 const Petal = styled.div`
   position: absolute;
   z-index: 1;
-  background: #7e94b1;
+  background: #f18989;
   border-radius: 2px 20px;
   transform-origin: 0% 0%;
   border-radius: 2% 50%;

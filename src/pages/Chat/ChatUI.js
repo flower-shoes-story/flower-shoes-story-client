@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ChatUI = ({ startIndex, moveDirection }) => {
+const ChatUI = ({ startIndex, startPosition, moveDirection }) => {
   const stairs = Array(10).fill("");
 
   return (
@@ -32,6 +32,7 @@ const ChatUI = ({ startIndex, moveDirection }) => {
         moveDirection={moveDirection}
         key={startIndex}
         startIndex={startIndex}
+        startPosition={startPosition}
       >
         <div className="head"></div>
         <div className="upper-body"></div>
@@ -278,24 +279,24 @@ const Character = styled.div`
 
   @keyframes moveDown {
     0% {
-      bottom: ${(props) => 3.472 * (props.startIndex) + "vw"};
-      right: ${(props) => 3.472 * (props.startIndex) + "vw"};
+      bottom: ${(props) => 3.472 * (props.startPosition) + "vw"};
+      right: ${(props) => 3.472 * (props.startPosition) + "vw"};
     }
     25% {
-      bottom: ${(props) => (props.startIndex * 3.472) + 1.041666 + "vw"};
-      right: ${(props) => (3.472 * props.startIndex) - 0.69444 + "vw"};
+      bottom: ${(props) => (props.startPosition * 3.472) + 1.041666 + "vw"};
+      right: ${(props) => (3.472 * props.startPosition) - 0.69444 + "vw"};
     }
     50% {
-      bottom: ${(props) => (props.startIndex * 3.472) + 1.041666 + "vw"};
-      right: ${(props) => (props.startIndex * 3.472) - 2.777 + "vw"};
+      bottom: ${(props) => (props.startPosition * 3.472) + 1.041666 + "vw"};
+      right: ${(props) => (props.startPosition * 3.472) - 2.777 + "vw"};
     }
     75% {
-      bottom: ${(props) => props.startIndex * 3.472 + "vw"};
-      right: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
+      bottom: ${(props) => props.startPosition * 3.472 + "vw"};
+      right: ${(props) => (props.startIndex) * 3.472 + "vw"};
     }
     100% {
-      bottom: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
-      right: ${(props) => (props.startIndex - 1) * 3.472 + "vw"};
+      bottom: ${(props) => (props.startIndex) * 3.472 + "vw"};
+      right: ${(props) => (props.startIndex) * 3.472 + "vw"};
     }
   }
 

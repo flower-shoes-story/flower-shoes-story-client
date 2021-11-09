@@ -19,6 +19,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [moveDirection, setMoveDirection] = useState(true);
   let [startIndex, setStartIndex] = useState(user.couple.stair);
+  const [startPosition, setStartPosition] = useState(user.couple.stair);
 
   useEffect(() => {
     socket.current = io(process.env.REACT_APP_SOCKET_URL);
@@ -53,18 +54,29 @@ const Chat = () => {
   useEffect(() => {
     socket.current.on(EVENTS.LISTEN_JUMP_DIRECTION, (direction) => {
       if (direction === "up") {
-        setMoveDirection(() => true);
         setStartIndex((prev) => prev + 1);
+        setMoveDirection(true);
         return;
       }
 
       if (direction === "down") {
-        setMoveDirection(() => false);
         setStartIndex((prev) => prev - 1);
+        setMoveDirection(false);
         return;
       }
     });
   }, [setMoveDirection]);
+
+  useEffect(() => {
+    if (moveDirection) {
+      setStartPosition(startIndex - 1);
+    }
+
+    if (!moveDirection) {
+      setStartPosition(startIndex + 1);
+    }
+
+  }, [startIndex, moveDirection]);
 
   const scrollToBottom = () => {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -104,7 +116,7 @@ const Chat = () => {
   return (
     <Wrapper>
       <PageTitle className="sr-only">Chat</PageTitle>
-      <ChatUI startIndex={startIndex} moveDirection={moveDirection} />
+      <ChatUI startIndex={startIndex} startPosition={startPosition} moveDirection={moveDirection} />
       <ChatBox>
         <ul>
           {messages.map((item, index) => {

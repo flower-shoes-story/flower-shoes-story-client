@@ -2,6 +2,7 @@ import React from "react";
 import loadable from "@loadable/component";
 import { Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PrivateRoute from "../components/Shared/PrivateRoute";
 
 const Chat = loadable(() => import("./Chat"));
 const Main = loadable(() => import("./Main"));
@@ -10,7 +11,6 @@ const Queue = loadable(() => import("./Queue"));
 const Register = loadable(() => import("./Register"));
 const Settings = loadable(() => import("./Settings"));
 const NotFound = loadable(() => import("./NotFound"));
-const PrivateRoute = loadable(() => import("../components/Shared/PrivateRoute"));
 
 const Pages = () => {
   const user = useSelector((state) => state.user);
